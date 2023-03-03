@@ -84,18 +84,16 @@ h1{
       }
 }
 
-/* 
-@media (min-width: 800px) {
+@media only screen and (min-width: 501px) and (max-width: 912px){
       form{
-            grid-template-columns: repeat(2, 1fr);   
-         }    
-         .card-padrinho{
-               width: 100%;
-         }
-         
-         button{
-               width: 100%;
-         }
-
+         grid-template-columns: repeat(2, 1fr);   
+      }    
+      .card-padrinho{
+            width: 100%;
+      }
+      
+      button{
+            width: 100%;
+      }
 }
-       */
+

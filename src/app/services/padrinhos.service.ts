@@ -12,28 +12,28 @@ export class PadrinhosService {
   fotoUrl!: string;
 
   constructor(
-    private angularFirestore: AngularFireDatabase,
+    private db: AngularFireDatabase,
     private storage: AngularFireStorage,
 
   ) { }
 
   addEscolha(data:any) {
-    return this.angularFirestore.list('/escolhas').push(data);
+    return this.db.list('/escolhas').push(data);
 
   }
 
   getAllPadrinhos() {
-    return this.padrinhos = this.angularFirestore.list('/padrinhos').valueChanges();
+    return this.padrinhos = this.db.list('/padrinhos').valueChanges();
     ;
   }
 
   getAllBixos() {
-    return this.bixos = this.angularFirestore.list('/bixos').valueChanges();
+    return this.bixos = this.db.list('/bixos').valueChanges();
     ;
   }
 
   delete(positionId: string) {
-    return this.angularFirestore.list('/padrinhos').remove(positionId);
+    return this.db.list('/padrinhos').remove(positionId);
   }
 
 }

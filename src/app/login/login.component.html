@@ -3,13 +3,15 @@
     
           <h1>Bem vindo potrinho!</h1>
           <h3>Para escolher seu padrinho/madrinha, digite seu código abaixo:</h3>
-          <form class="form">
+          <form (ngSubmit)="onSubmit()">
                 <mat-form-field class="input-code-size" appearance="outline">
                   <mat-label>Insira o código</mat-label>
-                  <input matInput placeHolder="Ex: 'Insira o código" type="text" maxlength="5" name="codigoAcesso" />
+                  <input matInput placeHolder="Ex: 'Insira o código" type="password" maxlength="20" name="password" required />
+                  <!-- [(ngModel)]="password" -->
+                  <div *ngIf="error">{{ error }}</div>
                   
                   <mat-error >
-                    Please enter a valid email address
+                    {{ error }}
                   </mat-error>
                   <mat-error >
                     Código <strong>Obrigatório</strong>
@@ -18,7 +20,7 @@
               </form>
     
               <div class="btn">
-                <button mat-raised-button color="primary" (click)="login()">Entrar</button>
+                <button mat-raised-button color="primary" type="submit">Entrar</button>
               </div>
     </main>
     

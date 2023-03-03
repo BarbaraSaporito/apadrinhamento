@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 // Components
 import { AppComponent } from './app.component';
 import { PadrinhoCardComponent } from './padrinho-card/padrinho-card.component';
-import { LoginComponent } from './confirm-dialog/login/login.component';
+import { LoginComponent } from './login/login.component';
 
 // Material
 import {MatInputModule} from '@angular/material/input';
