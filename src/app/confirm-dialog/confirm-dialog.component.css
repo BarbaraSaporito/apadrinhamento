@@ -1,0 +1,27 @@
+button {
+      margin-right: .7rem;
+      display: flex;
+      align-self: flex-end;
+}
+
+.text-dialog{
+      font-size: 1.1rem;
+      color: rgb(226, 10, 10);
+}
+
+.title-dialog{
+      text-transform: uppercase;
+      color: rgb(110, 1, 1);
+}
+
+
+.no:hover {
+      background-color: rgb(252, 154, 154);
+      transition: 1s;
+}
+
+
+.yes:hover {
+      background-color: rgb(220, 255, 169);
+      transition: .7s;
+}

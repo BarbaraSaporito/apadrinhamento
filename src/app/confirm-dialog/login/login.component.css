@@ -1,0 +1,54 @@
+
+
+main{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100vw;
+      height: 100vh;
+     
+}
+
+mat-form-field {
+      height: 8vh;
+
+}
+
+.input-code-size{
+      text-align: center;
+      align-items: center;
+}
+
+form{
+display: flex;
+flex-direction: column;
+}
+
+button{
+      width: 8vw;
+      margin-top: 1.5rem;
+}
+
+h1{
+      color: blue;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: 2rem;
+}
+
+h3{
+      color:rgb(255, 10, 2);
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: 1.1rem;
+
+}
+
+img{
+      border-radius: 10rem;
+      /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+      
+      margin-bottom: 1rem;
+}
+
+

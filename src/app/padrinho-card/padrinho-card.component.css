@@ -1,0 +1,101 @@
+.card-padrinho{
+      display: flex;
+      width: 100%;
+      align-items: center;
+      background-color: rgb(247, 247, 250);
+      box-shadow: rgba(87, 93, 50, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+      /* margin: 1rem 1rem; */
+      /* height: 75%; */
+      max-height: 100%;
+
+}
+
+mat-card-title{
+      text-align: start !important;
+      font-size: 1.5rem;
+}
+
+.card-padrinho:hover{
+      box-shadow: rgba(253, 98, 59, 0.25) 0px 30px 60px -12px inset, rgba(255, 255, 255, 0.3) 0px 18px 36px -18px inset;
+      transition: 1s;
+
+      }
+ img{
+      max-width: 90%;
+      max-height: 33vh;
+      border-radius: .5rem;
+      margin: 1rem;
+ }
+
+p{
+      font-size: 1.1rem;
+}
+
+button{
+      /* align-self: center;
+      display: flex; */
+      margin-top: 1rem;
+      margin-bottom: 0;
+      position: relative;
+}
+
+button:hover{
+      color: #fa5e5e;
+      background-color: rgb(5, 5, 146);
+      /* font-size: .9rem; */
+      transition: .8s;
+}
+
+main{
+      width: 100%;
+}
+
+form {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) ;
+      grid-gap: .8rem;
+      margin: .5rem .5rem;
+}
+
+mat-card{
+      margin-bottom: 1rem;
+}
+
+
+h1{
+     text-align: center;
+     font-size: 2rem;
+     padding: 2rem;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     color: rgb(25, 27, 168);
+     text-transform: uppercase;
+}
+
+@media (max-width: 500px) {
+      form{
+         grid-template-columns: 1fr;   
+      }    
+      .card-padrinho{
+            width: 100%;
+      }
+      
+      button{
+            width: 100%;
+      }
+}
+
+/* 
+@media (min-width: 800px) {
+      form{
+            grid-template-columns: repeat(2, 1fr);   
+         }    
+         .card-padrinho{
+               width: 100%;
+         }
+         
+         button{
+               width: 100%;
+         }
+
+}
+       */

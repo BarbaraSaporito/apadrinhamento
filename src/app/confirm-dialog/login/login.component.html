@@ -1,0 +1,24 @@
+<main>
+      <img [src]="logoImg" alt="Logo Atlética Fatec Ipiranga" />
+    
+          <h1>Bem vindo potrinho!</h1>
+          <h3>Para escolher seu padrinho/madrinha, digite seu código abaixo:</h3>
+          <form class="form">
+                <mat-form-field class="input-code-size" appearance="outline">
+                  <mat-label>Insira o código</mat-label>
+                  <input matInput placeHolder="Ex: 'Insira o código" type="text" maxlength="5" name="codigoAcesso" />
+                  
+                  <mat-error >
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error >
+                    Código <strong>Obrigatório</strong>
+                  </mat-error>
+                </mat-form-field>            
+              </form>
+    
+              <div class="btn">
+                <button mat-raised-button color="primary" (click)="login()">Entrar</button>
+              </div>
+    </main>
+    
