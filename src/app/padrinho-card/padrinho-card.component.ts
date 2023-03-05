@@ -14,7 +14,7 @@ import { PadrinhosService } from './../services/padrinhos.service';
 })
 export class PadrinhoCardComponent implements OnInit {
   public padrinhoForm: FormGroup;
-  padrinhos!: any[];  
+  padrinhos!: any[];
   bixos!: any[];
   fotoUrl!: string;
 
@@ -23,11 +23,11 @@ export class PadrinhoCardComponent implements OnInit {
     private padrinhosService: PadrinhosService,
     public dialog: MatDialog,
 
-  ) { 
-    this.padrinhoForm = this.formBuilder .group(
+  ) {
+    this.padrinhoForm = this.formBuilder.group(
       {
-       
-      }      
+
+      }
     )
   }
 
@@ -39,7 +39,7 @@ export class PadrinhoCardComponent implements OnInit {
 
   }
 
-  getAllPadrinhos(){
+  getAllPadrinhos() {
     this.padrinhosService.getAllPadrinhos().subscribe(data => {
       this.padrinhos = data;
     });
@@ -48,9 +48,9 @@ export class PadrinhoCardComponent implements OnInit {
   openDialog(index: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '35vw',
-      data:{
-       index: index, 
-       padrinhos: this.padrinhos
+      data: {
+        index: index,
+        padrinhos: this.padrinhos
       }
     });
 
@@ -58,24 +58,24 @@ export class PadrinhoCardComponent implements OnInit {
       if (result !== undefined) {
         console.log('The dialog was closed');
         console.log('Selected index: ', result);
-        this.enviarPadrinho(result);
+        this.enviarEscolha(result);
       }
     });
   }
 
-  enviarPadrinho(index: number): void {
-    
+  enviarEscolha(index: number): void {
     const selectedPadrinho = this.padrinhos[index];
-    const newPadrinhosRef = this.padrinhosService.addEscolha(selectedPadrinho);
+    const padrinhosId = selectedPadrinho.code + '-' + selectedPadrinho.nome;
+    this.padrinhosService.addEscolha(padrinhosId, selectedPadrinho);
 
   }
 
   deletePadrinho(index: number) {
     this.padrinhos[index].limit -= 1;
-      if (this.padrinhos[index].limit == 0){
-        const positionId = this.padrinhos[index].key ;
-        this.padrinhosService.delete(positionId);
-      }      
+    if (this.padrinhos[index].limit == 0) {
+      const positionId = this.padrinhos[index];
+      this.padrinhosService.delete(positionId);
+    }
   }
 
 }

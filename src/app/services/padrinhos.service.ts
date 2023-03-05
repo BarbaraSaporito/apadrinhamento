@@ -18,8 +18,9 @@ export class PadrinhosService {
 
   ) { }
 
-  addEscolha(data:any): void {
-    this.db.list<any>('/escolhas').push(data);
+  addEscolha(padrinhoNome: string, escolha:any[]): void {
+    const escolhasRef = this.db.list<any>('/escolhas');
+    escolhasRef.set(padrinhoNome, escolha);
   }
 
 
