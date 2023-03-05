@@ -1,3 +1,4 @@
+import { Padrinhos, Bixos } from './../interfaces/padrinhos';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -17,23 +18,23 @@ export class PadrinhosService {
 
   ) { }
 
-  addEscolha(data:any) {
-    return this.db.list('/escolhas').push(data);
-
+  addEscolha(data:any): void {
+    this.db.list<any>('/escolhas').push(data);
   }
 
-  getAllPadrinhos() {
-    return this.padrinhos = this.db.list('/padrinhos').valueChanges();
+
+  getAllPadrinhos(): Observable<Padrinhos[]>{
+    return this.padrinhos = this.db.list<Padrinhos>('/padrinhos').valueChanges();
     ;
   }
 
-  getAllBixos() {
-    return this.bixos = this.db.list('/bixos').valueChanges();
+  getAllBixos(): Observable<Bixos[]> {
+    return this.bixos = this.db.list<Bixos>('/bixos').valueChanges();
     ;
   }
 
-  delete(positionId: string) {
-    return this.db.list('/padrinhos').remove(positionId);
+  delete(positionId: string):void{
+     this.db.list<any>('/padrinhos').remove(positionId);
   }
 
 }

@@ -22,8 +22,7 @@ export class ConfirmDialogComponent implements OnInit {
   deletePadrinho() {
     const positionId = 'some-id-to-delete';
     this.padrinhosService.delete(positionId)
-      .then(() => console.log('Position deleted successfully'))
-      .catch((error) => console.error('Error deleting position:', error));
+      
   }
 
 }
