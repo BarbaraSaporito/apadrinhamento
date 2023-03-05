@@ -13,19 +13,19 @@ export class AuthService {
   constructor(
     private db: AngularFireDatabase,
     private padrinhosService: PadrinhosService,
-    
-    ) { }
 
-    ngOnInit(): void {
-  
-    }
+  ) { }
+
+  ngOnInit(): void {
+
+  }
 
 
   login(password: string): Observable<boolean> {
     return this.db.list('bixos').snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
-          ({ key: c.payload.key, ...c.payload.val() as Bixos})
+          ({ key: c.payload.key, ...c.payload.val() as Bixos })
         )
       ),
       map(users =>
@@ -33,5 +33,18 @@ export class AuthService {
       )
     );
   }
+
+  autenticado(): Observable<boolean> {
+    return this.login('password').pipe(
+      map(result => {
+        if (result) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
+  }
+
 }
 
