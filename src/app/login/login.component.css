@@ -10,10 +10,10 @@ main{
      
 }
 
-mat-form-field {
-      height: 8vh;
-
+span{
+      padding: .8rem;
 }
+
 
 .input-code-size{
       text-align: center;
@@ -24,10 +24,14 @@ form{
 display: flex;
 flex-direction: column;
 }
-
+mat-error{
+      font-size: .9rem;
+      margin-top: .4rem;
+}
 button{
       width: 8vw;
-      margin-top: 1.5rem;
+      margin-top: .6rem;
+      align-self: center;
 }
 
 h1{

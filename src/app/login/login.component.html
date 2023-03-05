@@ -1,26 +1,39 @@
 <main>
-      <img [src]="logoImg" alt="Logo Atlética Fatec Ipiranga" />
-    
-          <h1>Bem vindo potrinho!</h1>
-          <h2>Para escolher seu padrinho ou madrinha, digite seu código abaixo:</h2>
-          <form (ngSubmit)="onSubmit()">
-                <mat-form-field class="input-code-size" appearance="outline">
-                  <mat-label>Insira o código</mat-label>
-                  <input matInput placeHolder="Ex: 'Insira o código" type="password" maxlength="20" name="password" required />
-                  <!-- [(ngModel)]="password" -->
-                  <div *ngIf="error">{{ error }}</div>
-                  
-                  <mat-error >
-                    {{ error }}
-                  </mat-error>
-                  <mat-error >
-                    Código <strong>Obrigatório</strong>
-                  </mat-error>
-                </mat-form-field>            
-              </form>
-    
-              <div class="btn">
-                <button mat-raised-button color="primary" type="submit">Entrar</button>
-              </div>
-    </main>
-    
+  <img [src]="logoImg" alt="Logo Atlética Fatec Ipiranga" />
+
+  <h1>Bem vindo potrinho!</h1>
+  <h2>Para escolher seu padrinho ou madrinha, digite seu código abaixo:</h2>
+
+  <form (ngSubmit)="onLogin()">
+
+    <mat-form-field class="input-code-size" appearance="outline">
+      <!-- <mat-label>Insira o código</mat-label>
+      <input matInput placeHolder="Insira o código" type="password" maxlength="20" name="password" required=""
+        [(ngModel)]="password" [ngModelOptions]="{standalone: true}"
+        [type]="hide ? 'password' : 'text'" /> -->
+
+      <mat-label>Insira o código</mat-label>
+      <input matInput type="password" name="password" required="" [(ngModel)]="password"
+        [type]="hide ? 'password' : 'text'">
+      <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </span>
+
+      <!-- <mat-error>
+        {{ error }}
+      </mat-error> -->
+      <mat-error>
+        Código <strong>Obrigatório</strong>
+      </mat-error>
+
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit">Entrar</button>
+
+
+  </form>
+
+
+</main>

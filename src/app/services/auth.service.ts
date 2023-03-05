@@ -3,13 +3,23 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PadrinhosService } from './padrinhos.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(
+    private db: AngularFireDatabase,
+    private padrinhosService: PadrinhosService,
+    
+    ) { }
+
+    ngOnInit(): void {
+  
+    }
+
 
   login(password: string): Observable<boolean> {
     return this.db.list('bixos').snapshotChanges().pipe(
