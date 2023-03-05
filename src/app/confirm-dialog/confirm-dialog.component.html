@@ -1,9 +1,9 @@
 <h1 class="title-dialog" mat-dialog-title>Confirmação</h1>
 <div class="text-dialog" mat-dialog-content>
   Você só tem uma chance de escolher.
-  Tem certeza que deseja continuar com esse padrinho ou madrinha?
+  Tem certeza que deseja continuar com <strong>{{data.padrinhos[data.index].nome}}</strong>?
 </div>
 <div mat-dialog-actions>
-  <button class="no" mat-button mat-dialog-close>Não</button>
-  <button class="yes" mat-button mat-dialog-close cdkFocusInitial >Sim</button>
+  <button class="no" mat-button (click)="onNoClick()">Não</button>
+  <button class="yes" mat-button [mat-dialog-close]="data.index" cdkFocusInitial>Sim</button>
 </div>

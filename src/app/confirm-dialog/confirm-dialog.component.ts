@@ -1,6 +1,8 @@
 import { Escolha } from './../interfaces/padrinhos';
 import { PadrinhosService } from './../services/padrinhos.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject  } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -10,19 +12,18 @@ import { Component, OnInit } from '@angular/core';
 export class ConfirmDialogComponent implements OnInit {
   escolha: Escolha = {} as Escolha;
 
-  constructor(private padrinhosService: PadrinhosService) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<ConfirmDialogComponent>,
+    private padrinhosService: PadrinhosService
+    ) { }
 
   ngOnInit(): void {
   }
-  
-  addEscolha() {
-    
-  }
 
-  deletePadrinho() {
-    const positionId = 'some-id-to-delete';
-    this.padrinhosService.delete(positionId)
-      
+  onNoClick(): void {
+    this.dialogRef.close();
   }
+ 
 
 }

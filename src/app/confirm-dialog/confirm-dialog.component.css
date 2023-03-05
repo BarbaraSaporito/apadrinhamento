@@ -3,15 +3,18 @@ button {
       display: flex;
       align-self: flex-end;
 }
-
+strong{
+      color: rgb(226, 10, 10);
+}
 .text-dialog{
       font-size: 1.1rem;
-      color: rgb(226, 10, 10);
+      color: black;
+      
 }
 
 .title-dialog{
       text-transform: uppercase;
-      color: rgb(110, 1, 1);
+      color: rgb(226, 10, 10);
 }
 
 
@@ -22,6 +25,6 @@ button {
 
 
 .yes:hover {
-      background-color: rgb(220, 255, 169);
+      background-color: rgb(171, 245, 175);
       transition: .7s;
 }

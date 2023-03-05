@@ -14,7 +14,6 @@ import { PadrinhosService } from './../services/padrinhos.service';
 })
 export class PadrinhoCardComponent implements OnInit {
   public padrinhoForm: FormGroup;
-  // padrinhos: Padrinhos [] = new Array<Padrinhos>();
   padrinhos!: any[];  
   bixos!: any[];
   fotoUrl!: string;
@@ -23,8 +22,6 @@ export class PadrinhoCardComponent implements OnInit {
     public formBuilder: FormBuilder,
     private padrinhosService: PadrinhosService,
     public dialog: MatDialog,
-    // @Inject(MAT_DIALOG_DATA) public data: Escolha,
-    
 
   ) { 
     this.padrinhoForm = this.formBuilder .group(
@@ -36,17 +33,10 @@ export class PadrinhoCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllPadrinhos();
-    console.log(this.padrinhos)
-
   }
 
   onSubmit() {
-    // this.padrinhosService.addEscolha(this.data).then(() => {
-    //   // Data added successfully
-    //   this.dialogRef.close();
-    // }).catch(error => {
-    //   // Handle error
-    // });
+
   }
 
   getAllPadrinhos(){
@@ -54,25 +44,38 @@ export class PadrinhoCardComponent implements OnInit {
       this.padrinhos = data;
     });
   }
-  
-  getAllBixos(){
-    this.padrinhosService.getAllBixos().subscribe(data => {
-      this.bixos = data;
-  });
-}
 
   openDialog(index: number): void {
-    this.dialog.open(ConfirmDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '35vw',
-      // data:{
-      //   code: this.data.code,
-      //   padrinho: this.data.nome,
-      //   telefone: this.data.telefone,
-      //   bixo: this.data.nomeBixo,
-      //   telefoneBixo: this.data.telefoneBixo,
-      // },
+      data:{
+       index: index, 
+       padrinhos: this.padrinhos
+      }
+    });
 
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        console.log('The dialog was closed');
+        console.log('Selected index: ', result);
+        this.enviarPadrinho(result);
+      }
     });
   }
-  
+
+  enviarPadrinho(index: number): void {
+    
+    const selectedPadrinho = this.padrinhos[index];
+    const newPadrinhosRef = this.padrinhosService.addEscolha(selectedPadrinho);
+
+  }
+
+  deletePadrinho(index: number) {
+    this.padrinhos[index].limit -= 1;
+      if (this.padrinhos[index].limit == 0){
+        const positionId = this.padrinhos[index].key ;
+        this.padrinhosService.delete(positionId);
+      }      
+  }
+
 }
