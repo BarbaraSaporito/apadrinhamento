@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   hide = true;
 
   constructor(
+    private mSnack: MatSnackBar,
     private router: Router,
     private authService: AuthService,
     
@@ -25,17 +27,24 @@ export class LoginComponent implements OnInit {
 
   }
 
-
   onLogin() {
     this.authService.login(this.password).subscribe(
       success => {
         if (success) {
           this.router.navigate(['/padrinhos']);
         } else {
-          
+          this.abrirAlert('Código Inválido!');
         }
       },
     );
   }
+
+  abrirAlert(message: string) {
+    this.mSnack.open(message, 'X', {
+        duration: 2500,
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+    });
+}
 }
 

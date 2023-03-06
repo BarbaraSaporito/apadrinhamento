@@ -18,7 +18,7 @@ export class AuthService {
   ) { }
 
   ngOnInit(): void {
-
+    
   }
 
   login(password: string): Observable<boolean> {
@@ -31,7 +31,7 @@ export class AuthService {
       tap(users => {
         const usuarioLogado = users.find(user => user.instagram === password); 
         if (usuarioLogado) {
-          let user = users.find(user => user.nomeBixo);
+          let user = users.find(user => user.instagram === password);
           console.log(user!.nomeBixo)
           sessionStorage.setItem("username", user!.nomeBixo );
           sessionStorage.setItem("telefone", user!.telefoneBixo );

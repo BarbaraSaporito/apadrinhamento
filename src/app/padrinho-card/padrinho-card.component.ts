@@ -19,6 +19,7 @@ export class PadrinhoCardComponent implements OnInit {
   nomeBixo = sessionStorage.getItem("username");
   telefoneBixo = sessionStorage.getItem("telefone");
   firstName = this.getNome(this.nomeBixo!);
+  router: any;
 
   constructor(
     private padrinhosService: PadrinhosService,
@@ -65,11 +66,13 @@ export class PadrinhoCardComponent implements OnInit {
   enviarEscolha(index: number): void {
     const selectedPadrinho = this.padrinhos[index];
     const padrinhosId = selectedPadrinho.code + '-' + selectedPadrinho.nome;
-    selectedPadrinho.bixos = [{nome: this.nomeBixo, telefone: this.telefoneBixo }];
+    selectedPadrinho.zBixos = [{nome: this.nomeBixo, telefone: this.telefoneBixo }] ;
 
     this.padrinhosService.addEscolha(padrinhosId, selectedPadrinho);
 
-    sessionStorage.clear();
+    sessionStorage.clear();    
+    window.location.reload(); 
+    this.router.navigate(['login']);       
 
   }
 
@@ -78,8 +81,15 @@ export class PadrinhoCardComponent implements OnInit {
     if (this.padrinhos[index].limit == 0) {
       const positionId = this.padrinhos[index];
       this.padrinhosService.delete(positionId);
-    }
+    }    
   }
+
+  logout(): void {
+    this.router.navigate(['']);
+    sessionStorage.clear();
+    window.location.reload();     
+  }
+ 
 
   getNome(nome: string): string {
     const names = nome.split(' ');
