@@ -20,6 +20,7 @@ mat-card-title{
       transition: 1s;
 
       }
+
  img{
       max-width: 90%;
       max-height: 33vh;
@@ -37,6 +38,10 @@ button{
       margin-top: 1rem;
       margin-bottom: 0;
       position: relative;
+}
+
+strong{
+      color: #fa5e5e;
 }
 
 button:hover{
@@ -67,11 +72,14 @@ h1{
      font-size: 2rem;
      padding: 2rem;
      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-     color: rgb(25, 27, 168);
-     text-transform: uppercase;
+     color: rgb(2, 2, 2);
+     /* text-transform: uppercase; */
 }
 
 @media (max-width: 500px) {
+      h1{
+            font-size: 1.2rem;
+      }
       form{
          grid-template-columns: 1fr;   
       }    
@@ -85,6 +93,9 @@ h1{
 }
 
 @media only screen and (min-width: 501px) and (max-width: 912px){
+      h1{
+            font-size: 1.6rem;
+      }
       form{
          grid-template-columns: repeat(2, 1fr);   
       }    

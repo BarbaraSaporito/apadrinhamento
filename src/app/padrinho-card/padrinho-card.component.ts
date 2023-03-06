@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
+import { Bixos } from '../interfaces/padrinhos';
+import { AuthService } from '../services/auth.service';
 import { ConfirmDialogComponent } from './../confirm-dialog/confirm-dialog.component';
 import { PadrinhosService } from './../services/padrinhos.service';
-
-
-
 
 @Component({
   selector: 'app-padrinho-card',
@@ -13,22 +13,20 @@ import { PadrinhosService } from './../services/padrinhos.service';
   styleUrls: ['./padrinho-card.component.css']
 })
 export class PadrinhoCardComponent implements OnInit {
-  public padrinhoForm: FormGroup;
   padrinhos!: any[];
-  bixos!: any[];
+  bixo: any;
   fotoUrl!: string;
+  nomeBixo = sessionStorage.getItem("username");
+  telefoneBixo = sessionStorage.getItem("telefone");
+  firstName = this.getNome(this.nomeBixo!);
 
   constructor(
-    public formBuilder: FormBuilder,
     private padrinhosService: PadrinhosService,
     public dialog: MatDialog,
+    private authService: AuthService,
 
   ) {
-    this.padrinhoForm = this.formBuilder.group(
-      {
 
-      }
-    )
   }
 
   ngOnInit(): void {
@@ -50,9 +48,10 @@ export class PadrinhoCardComponent implements OnInit {
       width: '35vw',
       data: {
         index: index,
-        padrinhos: this.padrinhos
-      }
-    });
+        padrinhos: this.padrinhos,
+        bixoLogado: this.bixo
+    }
+  });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
@@ -66,7 +65,11 @@ export class PadrinhoCardComponent implements OnInit {
   enviarEscolha(index: number): void {
     const selectedPadrinho = this.padrinhos[index];
     const padrinhosId = selectedPadrinho.code + '-' + selectedPadrinho.nome;
+    selectedPadrinho.bixos = [{nome: this.nomeBixo, telefone: this.telefoneBixo }];
+
     this.padrinhosService.addEscolha(padrinhosId, selectedPadrinho);
+
+    sessionStorage.clear();
 
   }
 
@@ -76,6 +79,11 @@ export class PadrinhoCardComponent implements OnInit {
       const positionId = this.padrinhos[index];
       this.padrinhosService.delete(positionId);
     }
+  }
+
+  getNome(nome: string): string {
+    const names = nome.split(' ');
+    return names[0];
   }
 
 }

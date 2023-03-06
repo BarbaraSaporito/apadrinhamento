@@ -12,16 +12,14 @@ export interface Padrinhos {
 }
 
 export interface Bixos {
-    nomeBixo: string,
-    instagram: string,
-    telefoneBixo: string,
+    nomeBixo: string;
+    instagram: string;
+    telefoneBixo: string;
 }
 
 export interface Escolha extends Bixos, Padrinhos {
-    code: string,
-    padrinho: string,
-    telefone: string
-    bixo: Bixos[],
+    padrinho: Padrinhos;
+    bixos: Bixos[],
 }
 
 

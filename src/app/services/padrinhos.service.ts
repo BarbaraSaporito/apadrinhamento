@@ -1,4 +1,4 @@
-import { Padrinhos, Bixos } from './../interfaces/padrinhos';
+import { Padrinhos, Bixos, Escolha } from './../interfaces/padrinhos';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -18,7 +18,7 @@ export class PadrinhosService {
 
   ) { }
 
-  addEscolha(padrinhoNome: string, escolha:any[]): void {
+  addEscolha(padrinhoNome: string, escolha:Escolha): void {
     const escolhasRef = this.db.list<any>('/escolhas');
     escolhasRef.set(padrinhoNome, escolha);
   }

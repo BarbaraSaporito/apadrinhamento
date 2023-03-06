@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { environment } from '../environments/environment';
+import { FormsModule } from '@angular/forms';
 
 // Components
 import { AppComponent } from './app.component';
@@ -14,16 +16,19 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 //FireBase
 import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireDatabaseModule} from '@angular/fire/compat/database'
+import { AngularFireDatabase, AngularFireDatabaseModule} from '@angular/fire/compat/database'
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+
+import { AuthService } from './services/auth.service';
+import { Subject } from 'rxjs';
+
 
 @NgModule({
   declarations: [
@@ -45,9 +50,14 @@ import { FormsModule } from '@angular/forms';
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule,
+
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    Subject,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

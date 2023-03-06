@@ -1,7 +1,8 @@
 <main>
-      <h1>Bem vindx potrinhx , essas são suas opções: </h1>
+
+  <h1>Salve <strong>{{firstName}}</strong>, essas são suas opções: </h1>
       
-        <form [formGroup]="padrinhoForm">
+        <form>
           <mat-card class="card-padrinho" *ngFor="let padrinho of padrinhos; let i = index">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>

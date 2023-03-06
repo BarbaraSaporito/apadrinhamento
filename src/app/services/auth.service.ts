@@ -1,18 +1,19 @@
 import { Bixos } from '../interfaces/padrinhos';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { PadrinhosService } from './padrinhos.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+
 })
 export class AuthService {
-
   constructor(
     private db: AngularFireDatabase,
     private padrinhosService: PadrinhosService,
+    private subject: Subject<Bixos>
 
   ) { }
 
@@ -20,17 +21,23 @@ export class AuthService {
 
   }
 
-
   login(password: string): Observable<boolean> {
-    return this.db.list('bixos').snapshotChanges().pipe(
+    return this.db.list('/bixos').snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ key: c.payload.key, ...c.payload.val() as Bixos })
         )
       ),
-      map(users =>
-        users.some(user => user.instagram === password)
-      )
+      tap(users => {
+        const usuarioLogado = users.find(user => user.instagram === password); 
+        if (usuarioLogado) {
+          let user = users.find(user => user.nomeBixo);
+          console.log(user!.nomeBixo)
+          sessionStorage.setItem("username", user!.nomeBixo );
+          sessionStorage.setItem("telefone", user!.telefoneBixo );
+        }
+      }),
+      map(users => users.some(user => user.instagram === password))
     );
   }
 
