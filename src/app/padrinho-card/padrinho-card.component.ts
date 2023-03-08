@@ -19,7 +19,6 @@ export class PadrinhoCardComponent implements OnInit {
   telefoneBixo = sessionStorage.getItem("telefone");
   firstName = this.getNome(this.nomeBixo!);
 
-
   constructor(
     private padrinhosService: PadrinhosService,
     public dialog: MatDialog,
@@ -56,6 +55,7 @@ export class PadrinhoCardComponent implements OnInit {
     index: index,
     padrinhos: this.padrinhos,
     limit: this.padrinhos[index].limit
+    
   }
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -75,11 +75,16 @@ export class PadrinhoCardComponent implements OnInit {
   enviarEscolha(index: number): void {
     let selectedPadrinho = this.padrinhos[index];
     let zBixos = this.escolhas;
+    console.log();
     
     const padrinhosId = selectedPadrinho.code + '-' + selectedPadrinho.nome;
     zBixos.push({nome: this.nomeBixo, telefone: this.telefoneBixo});
-
+    
+    
     this.padrinhosService.addEscolha(padrinhosId, zBixos);
+    console.log(this.padrinhos[index]);
+    
+    this.deletePadrinho(index)
 
     sessionStorage.clear();    
     this.router.navigate(['']);
@@ -87,13 +92,16 @@ export class PadrinhoCardComponent implements OnInit {
     zBixos = [];
   }
 
-  // deletePadrinho(index: number) {
-  //   this.padrinhos[index].limit -= 1;
-  //   if (this.padrinhos[index].limit == 0) {
-  //     const positionId = this.padrinhos[index];
-  //     this.padrinhosService.delete(positionId);
-  //   }   
-  // }
+  deletePadrinho(index: number) {
+    this.padrinhos[index].limit -= 1;
+    console.log(this.padrinhos[index]);
+    if (this.padrinhos[index].limit == 0) {
+      const positionId = this.padrinhos[index];
+      this.padrinhosService.delete(index);
+    }  else{
+      this.padrinhosService.updatePadrinhos(index, this.padrinhos[index]);
+    }
+  }
 
   logout(): void {
     this.router.navigate(['']);

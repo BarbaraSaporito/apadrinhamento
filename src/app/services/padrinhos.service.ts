@@ -28,9 +28,11 @@ export class PadrinhosService {
     ;
   }
 
-  updatePadrinhos(index: any, limit: any): void {
+  updatePadrinhos(index: any, padrinho: any): void {
+    let str = index.toString();
     const escolhasRef = this.db.list<any>('/padrinhos');
-    escolhasRef.update(index, limit);
+    escolhasRef.update(str, padrinho).catch((err) => console.log(err));
+    console.log('depois');
   }
   
   getAllPadrinhos(): Observable<Padrinhos[]>{
@@ -38,8 +40,9 @@ export class PadrinhosService {
     ;
   }
 
-  delete(positionId: string):void{
-    this.db.list<any>('/padrinhos').remove(positionId);
+  delete(positionId: any):void{
+    let str = positionId.toString();
+    this.db.list<any>('/padrinhos').remove(str);
  }
 
   getAllBixos(): Observable<Bixos[]> {
