@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
@@ -17,12 +18,13 @@ export class PadrinhoCardComponent implements OnInit {
   nomeBixo = sessionStorage.getItem("username");
   telefoneBixo = sessionStorage.getItem("telefone");
   firstName = this.getNome(this.nomeBixo!);
-  router: any;
+
 
   constructor(
     private padrinhosService: PadrinhosService,
     public dialog: MatDialog,
     private authService: AuthService,
+    private router: Router
 
   ) {
 
@@ -50,8 +52,10 @@ export class PadrinhoCardComponent implements OnInit {
   }
 
   openDialog(index: number): void {
-    const data = {index: index,
+    const data = {
+    index: index,
     padrinhos: this.padrinhos,
+    limit: this.padrinhos[index].limit
   }
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -73,34 +77,23 @@ export class PadrinhoCardComponent implements OnInit {
     let zBixos = this.escolhas;
     
     const padrinhosId = selectedPadrinho.code + '-' + selectedPadrinho.nome;
-
-    // zBixos = selectedPadrinho.zBixos?.length ? [...selectedPadrinho.zBixos]: [];
     zBixos.push({nome: this.nomeBixo, telefone: this.telefoneBixo});
-    console.log(zBixos);
-
-    
-
-    // if (selectedPadrinho.zBixos == undefined || ""){
-    //   selectedPadrinho.zBixos = [{nome: this.nomeBixo, telefone: this.telefoneBixo }] 
-    // }else{
-    //   selectedPadrinho.zBixos.push({nome: this.nomeBixo, telefone: this.telefoneBixo }); 
-    // }
 
     this.padrinhosService.addEscolha(padrinhosId, zBixos);
 
     sessionStorage.clear();    
-    // window.location.reload(); 
-    // this.router.navigate(['login']);       
+    this.router.navigate(['']);
+    
     zBixos = [];
   }
 
-  deletePadrinho(index: number) {
-    this.padrinhos[index].limit -= 1;
-    if (this.padrinhos[index].limit == 0) {
-      const positionId = this.padrinhos[index];
-      this.padrinhosService.delete(positionId);
-    }    
-  }
+  // deletePadrinho(index: number) {
+  //   this.padrinhos[index].limit -= 1;
+  //   if (this.padrinhos[index].limit == 0) {
+  //     const positionId = this.padrinhos[index];
+  //     this.padrinhosService.delete(positionId);
+  //   }   
+  // }
 
   logout(): void {
     this.router.navigate(['']);

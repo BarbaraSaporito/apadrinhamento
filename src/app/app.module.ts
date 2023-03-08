@@ -28,6 +28,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AuthService } from './services/auth.service';
 import { Subject } from 'rxjs';
+import { AuthGuardService } from './guards/auth-guard.service';
+import { RouterModule } from '@angular/router';
+// import { AuthComponent } from './guards/auth/auth.component';
 
 
 @NgModule({
@@ -36,6 +39,7 @@ import { Subject } from 'rxjs';
     PadrinhoCardComponent,
     LoginComponent,
     ConfirmDialogComponent,
+    // AuthComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,13 +55,15 @@ import { Subject } from 'rxjs';
     AngularFireStorageModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatSnackBarModule,
+    MatSnackBarModule
 
   ],
   providers: [
-    AuthService,
+    AuthGuardService,
     Subject,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule],
+
 })
 export class AppModule { }

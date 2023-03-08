@@ -20,13 +20,7 @@ export class PadrinhosService {
 
   addEscolha(padrinhoNome: string, escolha: any): void {
     const escolhasRef = this.db.list<any>('/escolhas');
-    escolhasRef.update(padrinhoNome, escolha);
-  }
-
-  
-  getAllPadrinhos(): Observable<Padrinhos[]>{
-    return this.padrinhos = this.db.list<Padrinhos>('/padrinhos').valueChanges();
-    ;
+    escolhasRef.set(padrinhoNome, escolha);
   }
 
   getAllEscolhas(): Observable<Padrinhos[]>{
@@ -34,13 +28,25 @@ export class PadrinhosService {
     ;
   }
 
+  updatePadrinhos(index: any, limit: any): void {
+    const escolhasRef = this.db.list<any>('/padrinhos');
+    escolhasRef.update(index, limit);
+  }
+  
+  getAllPadrinhos(): Observable<Padrinhos[]>{
+    return this.padrinhos = this.db.list<Padrinhos>('/padrinhos').valueChanges();
+    ;
+  }
+
+  delete(positionId: string):void{
+    this.db.list<any>('/padrinhos').remove(positionId);
+ }
+
   getAllBixos(): Observable<Bixos[]> {
     return this.bixos = this.db.list<Bixos>('/bixos').valueChanges();
     ;
   }
 
-  delete(positionId: string):void{
-     this.db.list<any>('/padrinhos').remove(positionId);
-  }
+
 
 }
