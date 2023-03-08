@@ -18,14 +18,19 @@ export class PadrinhosService {
 
   ) { }
 
-  addEscolha(padrinhoNome: string, escolha:Escolha): void {
+  addEscolha(padrinhoNome: string, escolha: any): void {
     const escolhasRef = this.db.list<any>('/escolhas');
-    escolhasRef.set(padrinhoNome, escolha);
+    escolhasRef.update(padrinhoNome, escolha);
   }
 
-
+  
   getAllPadrinhos(): Observable<Padrinhos[]>{
     return this.padrinhos = this.db.list<Padrinhos>('/padrinhos').valueChanges();
+    ;
+  }
+
+  getAllEscolhas(): Observable<Padrinhos[]>{
+    return this.padrinhos = this.db.list<Padrinhos>('/escolhas').valueChanges();
     ;
   }
 

@@ -8,7 +8,8 @@ export interface Padrinhos {
     nome: string,
     periodo: string,
     telefone: string,
-    limit: number
+    limit: number,
+    zBixos: Bixos[]
 }
 
 export interface Bixos {

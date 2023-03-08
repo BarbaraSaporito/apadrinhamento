@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
-import { Bixos } from '../interfaces/padrinhos';
 import { AuthService } from '../services/auth.service';
 import { ConfirmDialogComponent } from './../confirm-dialog/confirm-dialog.component';
 import { PadrinhosService } from './../services/padrinhos.service';
@@ -14,6 +11,7 @@ import { PadrinhosService } from './../services/padrinhos.service';
 })
 export class PadrinhoCardComponent implements OnInit {
   padrinhos!: any[];
+  escolhas!: any[];
   bixo: any;
   fotoUrl!: string;
   nomeBixo = sessionStorage.getItem("username");
@@ -32,6 +30,7 @@ export class PadrinhoCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllPadrinhos();
+    this.getAllEscolhas()
   }
 
   onSubmit() {
@@ -44,14 +43,20 @@ export class PadrinhoCardComponent implements OnInit {
     });
   }
 
+  getAllEscolhas() {
+    this.padrinhosService.getAllEscolhas().subscribe(data => {
+      this.escolhas = data;
+    });
+  }
+
   openDialog(index: number): void {
+    const data = {index: index,
+    padrinhos: this.padrinhos,
+  }
+
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '35vw',
-      data: {
-        index: index,
-        padrinhos: this.padrinhos,
-        bixoLogado: this.bixo
-    }
+      data
   });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -64,16 +69,29 @@ export class PadrinhoCardComponent implements OnInit {
   }
 
   enviarEscolha(index: number): void {
-    const selectedPadrinho = this.padrinhos[index];
+    let selectedPadrinho = this.padrinhos[index];
+    let zBixos = this.escolhas;
+    
     const padrinhosId = selectedPadrinho.code + '-' + selectedPadrinho.nome;
-    selectedPadrinho.zBixos = [{nome: this.nomeBixo, telefone: this.telefoneBixo }] ;
 
-    this.padrinhosService.addEscolha(padrinhosId, selectedPadrinho);
+    // zBixos = selectedPadrinho.zBixos?.length ? [...selectedPadrinho.zBixos]: [];
+    zBixos.push({nome: this.nomeBixo, telefone: this.telefoneBixo});
+    console.log(zBixos);
+
+    
+
+    // if (selectedPadrinho.zBixos == undefined || ""){
+    //   selectedPadrinho.zBixos = [{nome: this.nomeBixo, telefone: this.telefoneBixo }] 
+    // }else{
+    //   selectedPadrinho.zBixos.push({nome: this.nomeBixo, telefone: this.telefoneBixo }); 
+    // }
+
+    this.padrinhosService.addEscolha(padrinhosId, zBixos);
 
     sessionStorage.clear();    
-    window.location.reload(); 
-    this.router.navigate(['login']);       
-
+    // window.location.reload(); 
+    // this.router.navigate(['login']);       
+    zBixos = [];
   }
 
   deletePadrinho(index: number) {
@@ -92,8 +110,8 @@ export class PadrinhoCardComponent implements OnInit {
  
 
   getNome(nome: string): string {
-    const names = nome.split(' ');
-    return names[0];
+    const names = nome?.split(' ');
+    return names[0] || "";
   }
 
 }
