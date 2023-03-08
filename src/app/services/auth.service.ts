@@ -32,8 +32,10 @@ export class AuthService {
         const usuarioLogado = users.find(user => user.instagram === password); 
         if (usuarioLogado) {
           let user = users.find(user => user.instagram === password);
+          console.log(user)
           sessionStorage.setItem("username", user!.nomeBixo );
           sessionStorage.setItem("telefone", user!.telefoneBixo );
+          sessionStorage.setItem("usuario", JSON.stringify(user) );
         }
       }),
       map(users => users.some(user => user.instagram === password))

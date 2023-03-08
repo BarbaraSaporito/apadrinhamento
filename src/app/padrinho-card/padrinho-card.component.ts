@@ -17,6 +17,7 @@ export class PadrinhoCardComponent implements OnInit {
   fotoUrl!: string;
   nomeBixo = sessionStorage.getItem("username");
   telefoneBixo = sessionStorage.getItem("telefone");
+  usuario: any = sessionStorage.getItem("usuario");
   firstName = this.getNome(this.nomeBixo!);
 
   constructor(
@@ -55,7 +56,6 @@ export class PadrinhoCardComponent implements OnInit {
     index: index,
     padrinhos: this.padrinhos,
     limit: this.padrinhos[index].limit
-    
   }
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -75,16 +75,16 @@ export class PadrinhoCardComponent implements OnInit {
   enviarEscolha(index: number): void {
     let selectedPadrinho = this.padrinhos[index];
     let zBixos = this.escolhas;
-    console.log();
     
     const padrinhosId = selectedPadrinho.code + '-' + selectedPadrinho.nome;
     zBixos.push({nome: this.nomeBixo, telefone: this.telefoneBixo});
     
-    
     this.padrinhosService.addEscolha(padrinhosId, zBixos);
-    console.log(this.padrinhos[index]);
     
     this.deletePadrinho(index)
+
+    const obj = JSON.parse(this.usuario)
+    this.padrinhosService.deleteBixos(obj.key);
 
     sessionStorage.clear();    
     this.router.navigate(['']);

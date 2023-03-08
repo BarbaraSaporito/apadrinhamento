@@ -45,6 +45,12 @@ export class PadrinhosService {
     this.db.list<any>('/padrinhos').remove(str);
  }
 
+ deleteBixos(idUsuario: string):void{
+  this.db.list<any>('/bixos').remove(idUsuario);
+}
+
+
+
   getAllBixos(): Observable<Bixos[]> {
     return this.bixos = this.db.list<Bixos>('/bixos').valueChanges();
     ;
