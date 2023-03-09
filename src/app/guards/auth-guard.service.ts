@@ -15,15 +15,15 @@ export class AuthGuardService implements CanActivate {
     this.authService.autenticado().subscribe(
       (result) => {
         if (!result) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['']);
         }
         else{
-          this.router.navigate(['/padrinhos']);
+          this.router.navigate(['padrinhos']);
         }
       },
       (error) => {
-        console.log('erro ao navegar', error);
-        this.router.navigate(['/login']);
+        console.log(error);
+        this.router.navigate(['']);
       }
     );
     return true;

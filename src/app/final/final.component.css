@@ -17,7 +17,7 @@ h1 {
 p {
       color: rgb(138, 6, 247);
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
 
 }
 
@@ -29,8 +29,12 @@ img {
 }
 
 @media (max-width: 500px) {
+      h1{
+            align-self: center;
+            font-size: 1.1rem;
+      }
       p {
-            font-size: 1rem;
+            font-size: .9rem;
             margin: 0;
 
       }

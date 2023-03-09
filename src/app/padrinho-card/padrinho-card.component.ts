@@ -32,7 +32,7 @@ export class PadrinhoCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllPadrinhos().then(res => console.log('rodei ngInit'));
+    this.getAllPadrinhos().then(res => console.log());
   }
 
   onSubmit() {
@@ -69,14 +69,12 @@ export class PadrinhoCardComponent implements OnInit {
   }
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '35vw',
+      width: '80%',
       data
   });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
-        console.log('The dialog was closed');
-        console.log('Selected index: ', result);
         this.enviarEscolha(result);
       }
     });
