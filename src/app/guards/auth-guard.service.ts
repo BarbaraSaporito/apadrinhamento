@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuardService implements CanActivate {
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private router: Router) { }
 
   canActivate(): boolean {
@@ -22,6 +22,7 @@ export class AuthGuardService implements CanActivate {
         }
       },
       (error) => {
+        console.log('erro ao navegar', error);
         this.router.navigate(['/login']);
       }
     );
