@@ -32,7 +32,6 @@ export class PadrinhosService {
     let str = index.toString();
     const escolhasRef = this.db.list<any>('/padrinhos');
     escolhasRef.update(str, padrinho).catch((err) => console.log(err));
-    console.log('depois');
   }
   
   getAllPadrinhos(): Observable<Padrinhos[]>{

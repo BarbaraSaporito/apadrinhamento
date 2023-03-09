@@ -8,11 +8,6 @@
   <form (ngSubmit)="onLogin()">
 
     <mat-form-field class="input-code-size" appearance="outline">
-      <!-- <mat-label>Insira o código</mat-label>
-      <input matInput placeHolder="Insira o código" type="password" maxlength="20" name="password" required=""
-        [(ngModel)]="password" [ngModelOptions]="{standalone: true}"
-        [type]="hide ? 'password' : 'text'" /> -->
-
       <mat-label>Insira o código</mat-label>
       <input matInput type="password" name="password" required="" [(ngModel)]="password"
         [type]="hide ? 'password' : 'text'">

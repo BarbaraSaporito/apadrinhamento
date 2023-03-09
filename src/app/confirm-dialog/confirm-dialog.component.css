@@ -1,3 +1,8 @@
+main{
+      display: flex;
+      flex-direction: column;
+}
+
 button {
       margin-right: .7rem;
       display: flex;
@@ -28,3 +33,9 @@ strong{
       background-color: rgb(171, 245, 175);
       transition: .7s;
 }
+
+/* @media (max-width: 500px) {      
+      main{
+            flex-direction: row;
+      }
+} */

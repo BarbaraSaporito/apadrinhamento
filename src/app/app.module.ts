@@ -30,6 +30,7 @@ import { AuthService } from './services/auth.service';
 import { Subject } from 'rxjs';
 import { AuthGuardService } from './guards/auth-guard.service';
 import { RouterModule } from '@angular/router';
+import { FinalComponent } from './final/final.component';
 // import { AuthComponent } from './guards/auth/auth.component';
 
 
@@ -39,6 +40,7 @@ import { RouterModule } from '@angular/router';
     PadrinhoCardComponent,
     LoginComponent,
     ConfirmDialogComponent,
+    FinalComponent,
     // AuthComponent,
   ],
   imports: [
