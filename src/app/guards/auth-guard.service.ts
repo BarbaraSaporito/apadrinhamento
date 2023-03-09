@@ -22,7 +22,7 @@ export class AuthGuardService implements CanActivate {
         }
       },
       (error) => {
-        console.log('erro ao navegar', error);
+        console.log(error);
         this.router.navigate(['/login']);
       }
     );
