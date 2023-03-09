@@ -99,7 +99,7 @@ export class PadrinhoCardComponent implements OnInit {
       this.padrinhosService.deleteBixos(obj.key);
 
       sessionStorage.clear();
-      this.router.navigate(['pronto']);
+      this.router.navigate(['/pronto']);
 
     })
 

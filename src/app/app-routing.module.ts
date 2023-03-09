@@ -7,9 +7,9 @@ import { PadrinhoCardComponent } from './padrinho-card/padrinho-card.component';
 
 const routes: Routes = [
   {path: 'pronto', component: FinalComponent,},
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '/', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, canActivate: [AuthGuardService]},
-  {path: 'padrinhos', component: PadrinhoCardComponent, },
+  {path: 'padrinhos', component: PadrinhoCardComponent, }
 ];
 
 @NgModule({
