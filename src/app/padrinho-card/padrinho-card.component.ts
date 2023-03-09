@@ -69,7 +69,7 @@ export class PadrinhoCardComponent implements OnInit {
   }
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '35vw',
+      width: '80%',
       data
   });
 

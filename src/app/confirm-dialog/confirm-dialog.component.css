@@ -1,4 +1,4 @@
-main{
+main {
       display: flex;
       flex-direction: column;
 }
@@ -8,16 +8,18 @@ button {
       display: flex;
       align-self: flex-end;
 }
-strong{
+
+strong {
       color: rgb(226, 10, 10);
 }
-.text-dialog{
+
+.text-dialog {
       font-size: 1.1rem;
       color: black;
-      
+
 }
 
-.title-dialog{
+.title-dialog {
       text-transform: uppercase;
       color: rgb(226, 10, 10);
 }
@@ -34,8 +36,8 @@ strong{
       transition: .7s;
 }
 
-/* @media (max-width: 500px) {      
-      main{
-            flex-direction: row;
+@media (min-width: 1200px) {
+      mat-dialog-container{
+            width: 40% !important;
       }
-} */
+}
