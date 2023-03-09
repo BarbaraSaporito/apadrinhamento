@@ -6,14 +6,14 @@ import { LoginComponent } from './login/login.component';
 import { PadrinhoCardComponent } from './padrinho-card/padrinho-card.component';
 
 const routes: Routes = [
+  // {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', component: LoginComponent, },
+  {path: 'padrinhos', component: PadrinhoCardComponent, canActivate: [AuthGuardService] },
   {path: 'pronto', component: FinalComponent,},
-  {path: '/', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent, canActivate: [AuthGuardService]},
-  {path: 'padrinhos', component: PadrinhoCardComponent, }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
