@@ -23,18 +23,16 @@ export class PadrinhosService {
     escolhasRef.set(padrinhoNome, escolha);
   }
 
-  getAllEscolhas(): Observable<Padrinhos[]>{
-    return this.padrinhos = this.db.list<Padrinhos>('/escolhas').valueChanges();
-    ;
+  getAllEscolhas(padrinhoId: string): Observable<Padrinhos[]>{
+    return this.padrinhos = this.db.list<Padrinhos>('/escolhas/' + padrinhoId).valueChanges();
   }
 
   updatePadrinhos(index: any, padrinho: any): void {
     let str = index.toString();
     const escolhasRef = this.db.list<any>('/padrinhos');
     escolhasRef.update(str, padrinho).catch((err) => console.log(err));
-    console.log('depois');
   }
-  
+
   getAllPadrinhos(): Observable<Padrinhos[]>{
     return this.padrinhos = this.db.list<Padrinhos>('/padrinhos').valueChanges();
     ;

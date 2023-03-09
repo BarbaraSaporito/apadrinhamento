@@ -15,6 +15,7 @@ export class PadrinhoCardComponent implements OnInit {
   escolhas!: any[];
   bixo: any;
   fotoUrl!: string;
+  padrinhoSelecionado: any;
   nomeBixo = sessionStorage.getItem("username");
   telefoneBixo = sessionStorage.getItem("telefone");
   usuario: any = sessionStorage.getItem("usuario");
@@ -31,8 +32,7 @@ export class PadrinhoCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllPadrinhos();
-    this.getAllEscolhas()
+    this.getAllPadrinhos().then(res => console.log('rodei ngInit'));
   }
 
   onSubmit() {
@@ -40,22 +40,32 @@ export class PadrinhoCardComponent implements OnInit {
   }
 
   getAllPadrinhos() {
-    this.padrinhosService.getAllPadrinhos().subscribe(data => {
-      this.padrinhos = data;
-    });
+    return new Promise(resolve => {
+      this.padrinhosService.getAllPadrinhos().subscribe(data => {
+        this.padrinhos = data;
+        resolve(data);
+      });
+    })
   }
 
-  getAllEscolhas() {
-    this.padrinhosService.getAllEscolhas().subscribe(data => {
-      this.escolhas = data;
-    });
+  getAllEscolhas(padrinhoId: string) {
+    return new Promise(resolve => {
+      this.padrinhosService.getAllEscolhas(padrinhoId).subscribe(data => {
+        this.escolhas = data || [];
+        resolve(data);
+      });
+    })
   }
 
-  openDialog(index: number): void {
+  findPadrinho(index: string) {
+    return this.padrinhos.find((padrinho:any) => padrinho.code  === index)
+  }
+
+  openDialog(index: string): void {
+
     const data = {
     index: index,
-    padrinhos: this.padrinhos,
-     
+    padrinhos: this.findPadrinho(index),
   }
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -72,44 +82,50 @@ export class PadrinhoCardComponent implements OnInit {
     });
   }
 
-  enviarEscolha(index: number): void {
-    let selectedPadrinho = this.padrinhos[index];
-    let zBixos = this.escolhas;
-    
+  enviarEscolha(index: string): void {
+    const parsedIndex = parseInt(index);
+    const selectedPadrinho = this.findPadrinho(index);
+    this.padrinhoSelecionado = selectedPadrinho;
+
     const padrinhosId = selectedPadrinho.code + '-' + selectedPadrinho.nome;
-    zBixos.push({nome: this.nomeBixo, telefone: this.telefoneBixo});
-    
-    this.padrinhosService.addEscolha(padrinhosId, zBixos);
-    
-    this.deletePadrinho(index)
 
-    const obj = JSON.parse(this.usuario)
-    this.padrinhosService.deleteBixos(obj.key);
+    this.getAllEscolhas(padrinhosId).then(res => {
+      const zBixos = this.escolhas || [];
+      zBixos.push({nome: this.nomeBixo, telefone: this.telefoneBixo});
 
-    sessionStorage.clear();    
-    this.router.navigate(['']);
-    
+      this.padrinhosService.addEscolha(padrinhosId, zBixos);
+
+      this.deletePadrinho(parsedIndex);
+
+      const obj = JSON.parse(this.usuario)
+      this.padrinhosService.deleteBixos(obj.key);
+
+      sessionStorage.clear();
+      this.router.navigate(['pronto']);
+
+    })
+
   }
 
   deletePadrinho(index: number) {
-    this.padrinhos[index].limit -= 1;
-    console.log(this.padrinhos[index]);
-    if (this.padrinhos[index].limit == 0) {
-      console.log(index);
-      
-      const positionId = this.padrinhos[index];
+
+    this.padrinhoSelecionado.limit--;
+
+    if (this.padrinhoSelecionado.limit === 0) {
       this.padrinhosService.delete(index);
     }  else{
-      this.padrinhosService.updatePadrinhos(index, this.padrinhos[index]);
+      this.padrinhosService.updatePadrinhos(index, this.padrinhoSelecionado);
     }
   }
 
+  /*
   logout(): void {
     this.router.navigate(['']);
     sessionStorage.clear();
-    window.location.reload();     
+    window.location.reload();
   }
- 
+  */
+
 
   getNome(nome: string): string {
     const names = nome?.split(' ');
