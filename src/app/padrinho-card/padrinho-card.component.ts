@@ -55,7 +55,7 @@ export class PadrinhoCardComponent implements OnInit {
     const data = {
     index: index,
     padrinhos: this.padrinhos,
-    limit: this.padrinhos[index].limit
+     
   }
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -65,6 +65,8 @@ export class PadrinhoCardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
+        console.log('The dialog was closed');
+        console.log('Selected index: ', result);
         this.enviarEscolha(result);
       }
     });
@@ -85,14 +87,16 @@ export class PadrinhoCardComponent implements OnInit {
     this.padrinhosService.deleteBixos(obj.key);
 
     sessionStorage.clear();    
-    this.router.navigate(['/pronto']);
+    this.router.navigate(['']);
     
-    zBixos = [];
   }
 
   deletePadrinho(index: number) {
     this.padrinhos[index].limit -= 1;
+    console.log(this.padrinhos[index]);
     if (this.padrinhos[index].limit == 0) {
+      console.log(index);
+      
       const positionId = this.padrinhos[index];
       this.padrinhosService.delete(index);
     }  else{
@@ -100,9 +104,16 @@ export class PadrinhoCardComponent implements OnInit {
     }
   }
 
+  logout(): void {
+    this.router.navigate(['']);
+    sessionStorage.clear();
+    window.location.reload();     
+  }
+ 
 
   getNome(nome: string): string {
     const names = nome?.split(' ');
     return names[0] || "";
   }
+
 }

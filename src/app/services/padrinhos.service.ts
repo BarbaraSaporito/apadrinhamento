@@ -32,6 +32,7 @@ export class PadrinhosService {
     let str = index.toString();
     const escolhasRef = this.db.list<any>('/padrinhos');
     escolhasRef.update(str, padrinho).catch((err) => console.log(err));
+    console.log('depois');
   }
   
   getAllPadrinhos(): Observable<Padrinhos[]>{
@@ -47,8 +48,6 @@ export class PadrinhosService {
  deleteBixos(idUsuario: string):void{
   this.db.list<any>('/bixos').remove(idUsuario);
 }
-
-
 
   getAllBixos(): Observable<Bixos[]> {
     return this.bixos = this.db.list<Bixos>('/bixos').valueChanges();

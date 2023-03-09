@@ -6,6 +6,7 @@
           <mat-card class="card-padrinho" *ngFor="let padrinho of padrinhos; let i = index">
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
+
               <mat-card-title>{{padrinhos[i].nome}}</mat-card-title>
               <mat-card-subtitle>{{padrinhos[i].curso}}/ {{padrinhos[i].periodo}}</mat-card-subtitle>
             </mat-card-header>
@@ -16,7 +17,7 @@
                 <p><b>Frase: </b>{{padrinhos[i].frase}}</p>    
             </mat-card-content>
             <mat-card-actions>
-              <button mat-raised-button (click)="openDialog(i)">
+              <button mat-raised-button (click)="openDialog(padrinhos[i].code)">
                 ESCOLHER
                 <mat-icon color="warn">favorite</mat-icon>
               </button>
