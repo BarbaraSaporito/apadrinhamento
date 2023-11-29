@@ -1,27 +1,33 @@
-# Apadrinhamento
+# Projeto de Apadrinhamento
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
+Bem-vindo ao Projeto de Apadrinhamento! Este projeto tem como objetivo facilitar a integração de novos alunos à faculdade, proporcionando uma plataforma onde os alunos podem se conectar com padrinhos escolhidos de acordo com seus interesses e necessidades.
 
-## Development server
+## Estrutura do Projeto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O projeto está organizado da seguinte forma:
 
-## Code scaffolding
+- **final:** Contém componentes e lógica relacionados a tela de agradecimento e finalização após a escolha bem sucedida.
+- **guards:** Implementação de guards para proteção de rotas.
+- **interfaces:** Interfaces utilizadas no projeto.
+- **login:** Componentes e lógica relacionados ao processo de login na plataforma.
+- **padrinho-card:** Componentes relacionados à exibição e seleção de padrinhos.
+- **services:** Serviços utilizados para integração com a API e outras funcionalidades.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Pré-requisitos
 
-## Build
+Antes de começar, certifique-se de ter o [Node.js](https://nodejs.org/) instalado em seu sistema.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Configuração do Projeto
 
-## Running unit tests
+1. Clone o repositório.
+   ```bash
+   git clone https://github.com/seu-usuario/nome-do-projeto.git
+   cd nome-do-projeto
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Firebase API
+Este projeto utiliza o Firebase como backend para autenticação e armazenamento de dados. Certifique-se de configurar suas credenciais do Firebase no arquivo de configuração apropriado.
 
-## Running end-to-end tests
+## Contribuição
+Sinta-se à vontade para contribuir com este projeto abrindo issues, propondo melhorias ou enviando pull requests.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Aproveite sua jornada acadêmica! 🎓
