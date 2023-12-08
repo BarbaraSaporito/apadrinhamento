@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         if (success) {
           this.router.navigate(['/padrinhos']);
         } else {
-          this.abrirAlert('Código Inválido!');
+           this.router.navigate(['/padrinhos']);
         }
       },
     );
